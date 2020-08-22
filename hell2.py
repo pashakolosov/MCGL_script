@@ -3,20 +3,20 @@ import time
 
 
 duration = 0
-index = 0
+increase = 35
 
-
-prof_craft_last_cell = {
-    'x': 1325,
-    'y': 735
-}
 
 cell_1 = {
     'x': 1215,
     'y': 690
 }
 
-prof_craft_result = {
+profCraft_cell_4 = {
+    'x': 1325,
+    'y': 735
+}
+
+profCraft_result = {
     'x': 1400,
     'y': 735
 }
@@ -24,40 +24,57 @@ prof_craft_result = {
 
 print('Начало работы скрипта через 5 сек')
 time.sleep(5)
+# ===========================================================================
 
 
-def out():
-    pg.moveTo(result_pos_x, result_pos_y, duration=duration)
+def take_a_bucket_of_lava():
+    pg.moveTo(cell_1['x'], cell_1['y'], duration=duration)
+    pg.click()
+
+
+def drag_the_bucket():
+    pg.moveTo(profCraft_cell_4['x'], profCraft_cell_4['y'], duration=duration)
+    pg.click()
+
+
+def pick_up_steel_through_shift():
+    pg.moveTo(profCraft_result['x'], profCraft_result['y'], duration=duration)
     pg.keyDown('shift')
     pg.click()
     pg.keyUp('shift')
 
 
-def move_to_craft():
-    pg.moveTo(vedro_pos_x, vedro_pos_y, duration=duration)
-    pg.click()
+def craft_steel():
+    take_a_bucket_of_lava()
+    drag_the_bucket()
+    pick_up_steel_through_shift()
+    cell_1['x'] += increase
 
 
-def move_to_one_line(pos1, pos2):
-    pg.moveTo(pos1, pos2, duration=duration)
-    pg.click()
-    move_to_craft()
-    out()
-    first_vedro_x += 35
-    index += 1
+def craft_27_steel():
+    index = 0
+
+    while index < 27:
+
+        if index % 9 == 0:
+            cell_1['x'] = 1215
+            cell_1['y'] -= increase
+
+        craft_steel()
+        index += 1
 
 
-while index < 27:
-    pg.moveTo(pos_x_1, pos_y_2, duration=duration)
-    pg.click()
-    move_to_craft()
-    out()
-    pos_x_1 += 35
-    index += 1
-    if index == 9:
-        pos_x_1 = 1215
-        pos_y_2 -= 35
 
-    if index == 18:
-        pos_x_1 = 1215
-        pos_y_2 -= 35
+
+
+
+
+
+
+
+
+
+
+
+
+
