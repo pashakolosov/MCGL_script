@@ -1,6 +1,7 @@
 import pyautogui as pg
 import time
 
+pg.PAUSE = 0.1
 
 duration = 0
 increase = 35
@@ -8,7 +9,7 @@ increase = 35
 
 cell_1 = {
     'x': 1215,
-    'y': 720
+    'y': 735
 }
 
 cell_27 = {
@@ -33,7 +34,7 @@ time.sleep(5)
 # ===========================================================================
 
 
-def take_a_bucket_of_lava():
+def select_the_first_cell():
     pg.moveTo(cell_1['x'], cell_1['y'], duration=duration)
     pg.click()
 
@@ -51,7 +52,7 @@ def pick_up_steel_through_shift():
 
 
 def craft_steel_one_iteration():
-    take_a_bucket_of_lava()
+    select_the_first_cell()
     put_the_bucket_in_the_craft()
     pick_up_steel_through_shift()
     cell_1['x'] += increase
@@ -78,10 +79,30 @@ def craft_27_steel():
     put_the_bucket_in_18_cell()
 
 
+def click_on_all_bucket():
+    pg.keyDown('shift')
+
+    cell_1['y'] += 105
+
+    index = 0
+
+    while index < 27:
+
+        if index % 9 == 0:
+            cell_1['x'] = 1215
+            cell_1['y'] -= increase
+
+        select_the_first_cell()
+        cell_1['x'] += increase
+        index += 1
+
+    pg.keyUp('shift')
+
+
 if __name__ == '__main__':
     craft_27_steel()
 
-
+    click_on_all_bucket()
 
 
 
