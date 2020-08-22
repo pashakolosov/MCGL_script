@@ -1,7 +1,6 @@
 import pyautogui as pg
 import time
 
-pg.PAUSE = 0.1
 
 duration = 0
 increase = 35
