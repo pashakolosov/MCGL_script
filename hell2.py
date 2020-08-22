@@ -3,17 +3,24 @@ import time
 
 
 duration = 0
-
 index = 0
 
-vedro_pos_x = 1325
-vedro_pos_y = 735
 
-first_vedro_x = 1215
-first_vedro_y = 690
+prof_craft_last_cell = {
+    'x': 1325,
+    'y': 735
+}
 
-result_pos_x = 1400
-result_pos_y = 735
+cell_1 = {
+    'x': 1215,
+    'y': 690
+}
+
+prof_craft_result = {
+    'x': 1400,
+    'y': 735
+}
+
 
 print('Начало работы скрипта через 5 сек')
 time.sleep(5)
@@ -31,20 +38,26 @@ def move_to_craft():
     pg.click()
 
 
-move_to_one_line()
-
-
-while index < 27:
-    pg.moveTo(first_vedro_x, first_vedro_y, duration=duration)
+def move_to_one_line(pos1, pos2):
+    pg.moveTo(pos1, pos2, duration=duration)
     pg.click()
     move_to_craft()
     out()
     first_vedro_x += 35
     index += 1
+
+
+while index < 27:
+    pg.moveTo(pos_x_1, pos_y_2, duration=duration)
+    pg.click()
+    move_to_craft()
+    out()
+    pos_x_1 += 35
+    index += 1
     if index == 9:
-        first_vedro_x = 1215
-        first_vedro_y -= 35
+        pos_x_1 = 1215
+        pos_y_2 -= 35
 
     if index == 18:
-        first_vedro_x = 1215
-        first_vedro_y -= 35
+        pos_x_1 = 1215
+        pos_y_2 -= 35
